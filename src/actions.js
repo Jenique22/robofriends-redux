@@ -6,6 +6,9 @@ export const setSearchField = (Text) => ({
     payload : Text
 })
 
-export const requestRobots = (dispatch) => {
-    dispatch({ type:})
-}
+export const requestRobots = () => (dispatch) => {
+    dispatch({ type: REQUEST_ROBOTS_PENDING })
+    apiCall('https://jsonplaceholder.typicode.com/users')
+      .then(data => dispatch({ type: REQUEST_ROBOTS_SUCCESS, payload: data }))
+      .catch(error => dispatch({ type: REQUEST_ROBOTS_FAILED, payload: error }))
+  }
